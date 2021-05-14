@@ -1,0 +1,14 @@
+{
+  "name": "dot7s",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "concurrently \"yarn run dev:front\" \"yarn run dev:back\"",
+    "dev:back": "cd back && yarn run dev",
+    "dev:front": "cd front && yarn run dev"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^6.1.0"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "lib": [
+      "ES2015",
+      "DOM"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "$front/*": ["./front/src/*"],
+      "$back/*": ["./back/src/*"],
+      "$common/*": ["./common/src/*"]
+    }
+  }
+}

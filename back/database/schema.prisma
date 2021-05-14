@@ -1,0 +1,22 @@
+datasource db {
+  url = env("DATABASE_URL")
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  accountId String @unique
+  characterName String @unique
+  inDungeon Boolean
+  // IMPORTANT : All JSon fields below must be validated via back-end
+  weapons Json
+  equipment Json
+  inventory Json
+  firstClass Json?
+  secondClass Json?
+  craftClass Json?
+}
