@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "dotenv nodemon src/index.ts",
     "dev:db:migrations:generate": "dotenv yarn run db:migrations:generate",
-    "db:migrations:generate": "prisma migrate dev --schema ./database/schema.prisma"
+    "db:migrations:generate": "prisma migrate dev --schema ./database/schema.prisma",
+    "db:client:generate": "prisma generate --schema ./database/schema.prisma"
   },
   "dependencies": {
     "@prisma/client": "^2.22.1",
