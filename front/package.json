@@ -3,17 +3,25 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "dev": "webpack --watch"
+    "clean": "shx rm -rf dist",
+    "dev": "yarn run clean && concurrently \"yarn run dev:app\" \"yarn run dev:admin\"",
+    "dev:app": "webpack --watch --env platform=\"app\"",
+    "dev:admin": "webpack --watch --env platform=\"admin\""
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0",
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.5",
     "@types/styled-components": "^5.1.9",
+    "concurrently": "^6.2.0",
+    "shx": "^0.3.3",
     "ts-loader": "^9.1.2",
     "tsconfig-paths-webpack-plugin": "^3.5.1",
     "typescript": "^4.2.4",

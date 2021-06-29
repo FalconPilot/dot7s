@@ -10,8 +10,14 @@ generator client {
 enum Race {
   Human
   Elf
-  Djinn
-  Hound
+  Porcus
+  Nautilus
+}
+
+enum ArmorWeight {
+  Light
+  Medium
+  Heavy
 }
 
 enum Gender {
@@ -19,18 +25,108 @@ enum Gender {
   Female
 }
 
+model Enchantment {
+  id Int @id @default(autoincrement())
+  weapons Weapon[]
+  torsoArmors TorsoArmor[]
+  rings Ring[]
+  // BACK-END VALIDATION REQUIRED
+  statsModifiers Json
+  // Localization
+  nameFR String
+}
+
+model DamageType {
+  id Int @id @default(autoincrement())
+  // Localization
+  nameFR String
+}
+
+model CharacterClass {
+  id Int @id @default(autoincrement())
+  // Localization
+  nameFR String
+}
+
+model Skill {
+  id Int @id @default(autoincrement())
+  weaponClasses WeaponClass[]
+  // Localization
+  nameFR String
+  descriptionFR String
+}
+
+model WeaponClass {
+  id Int @id @default(autoincrement())
+  skills Skill[]
+  weapons Weapon[]
+  // Localization
+  nameFR String
+  descriptionFR String
+}
+
+model Weapon {
+  id Int @id @default(autoincrement())
+  minDamage Int
+  maxDamage Int
+  weaponClass WeaponClass @relation(fields: [weaponClassId], references: [id])
+  weaponClassId Int
+  characters Character[]
+  enchantments Enchantment[]
+  // Localization
+  nameFR String
+  descriptionFR String
+}
+
+model TorsoArmor {
+  id Int @id @default(autoincrement())
+  weight ArmorWeight
+  enchantments Enchantment[]
+  characters Character[]
+  // Localization
+  nameFR String
+  descriptionFR String
+}
+
+model Ring {
+  id Int @id @default(autoincrement())
+  enchantments Enchantment[]
+  charactersWithRing1 Character[] @relation(name: "ring1")
+  charactersWithRing2 Character[] @relation(name: "ring2")
+  charactersWithRing3 Character[] @relation(name: "ring3")
+  charactersWithRing4 Character[] @relation(name: "ring4")
+  // Localization
+  nameFR String
+  descriptionFR String
+}
+
+model Character {
+  id Int @id @default(autoincrement())
+  name String @unique
+  race Race
+  gender Gender
+  inDungeon Boolean
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  // Weapon
+  weapon Weapon? @relation(fields: [weaponId], references: [id])
+  weaponId Int?
+  // Armor
+  torsoArmor TorsoArmor? @relation(fields: [torsoArmorId], references: [id])
+  torsoArmorId Int?
+  // Rings
+  ring1 Ring? @relation(name: "ring1", fields: [ring1Id], references: [id])
+  ring1Id Int?
+  ring2 Ring? @relation(name: "ring2", fields: [ring2Id], references: [id])
+  ring2Id Int?
+  ring3 Ring? @relation(name: "ring3", fields: [ring3Id], references: [id])
+  ring3Id Int?
+  ring4 Ring? @relation(name: "ring4", fields: [ring4Id], references: [id])
+  ring4Id Int?
+}
+
 model User {
   id Int @id @default(autoincrement())
   accountId String @unique
-  characterName String @unique
-  characterRace Race?
-  characterGender Gender?
-  inDungeon Boolean
-  // IMPORTANT : All JSon fields below must be validated via back-end
-  weapons Json
-  equipment Json
-  inventory Json
-  firstClass Json?
-  secondClass Json?
-  craftClass Json?
+  character Character?
 }

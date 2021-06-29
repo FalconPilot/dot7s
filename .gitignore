@@ -1,5 +1,10 @@
+# Local-only files
 node_modules/
 dist/
-.DS_Store
+
+# Private files
 .env
-adminer.php
+
+# Artifacts
+yarn-error.log
+.DS_Store

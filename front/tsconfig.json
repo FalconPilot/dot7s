@@ -4,7 +4,9 @@
     "jsx": "react"
   },
   "include": [
-    "./src/**/*.ts",
-    "./src/**/*.tsx"
+    "./src-app/**/*.ts",
+    "./src-app/**/*.tsx",
+    "./src-admin/**/*.ts",
+    "./src-admin/**/*.tsx"
   ]
 }
