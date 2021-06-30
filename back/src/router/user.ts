@@ -1,31 +1,29 @@
-import { User } from '@prisma/client'
+import * as Either from 'fp-ts/Either'
+import { pipe } from 'fp-ts/function'
 
-import { RouterFunction } from '$back/types'
-import { renderErrorPage } from '$back/utils'
+import { APIError, RouterFunction } from '$back/types'
+import { renderErrorJson, validateNumeric } from '$back/utils'
 
 export const userRouter: RouterFunction = (app, env, client) => {
-  // GET User
-  app.get('/user/:id', async (req, res) => {
-    const userId: number = parseInt(req.params.id, 10)
+  // [GET] One user
+  app.get('/users/:id', async (req, res) => {
+    const result = await pipe(
+      validateNumeric('userId')(req.params.id),
+      Either.matchW(
+        err => err,
+        async id => await client.user.findUnique({
+          where: { id }
+        }).then(user => user ?? new APIError({
+          code: 404,
+          message: 'User not found'
+        }))
+      ),
+    )
 
-    if (isNaN(userId)) {
-      return renderErrorPage(res, {
-        code: 500,
-        message: 'UserID should be a number'
-      })
+    if (result instanceof Error) {
+      return renderErrorJson(res, result.options)
     }
 
-    const user: User | null = await client.user.findUnique({
-      where: { id: userId }
-    })
-
-    if (!user) {
-      return renderErrorPage(res, {
-        code: 404,
-        message: 'User not found'
-      })
-    }
-
-    res.json(user)
+    res.json(result)
   })
 }

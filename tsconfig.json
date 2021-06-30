@@ -1,10 +1,8 @@
 {
   "compilerOptions": {
     "strict": true,
-    "lib": [
-      "ES2015",
-      "DOM"
-    ],
+    "downlevelIteration": true,
+    "lib": ["es2017"],
     "baseUrl": ".",
     "paths": {
       "$front/app/*": ["./front/src-app/*"],

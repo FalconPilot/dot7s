@@ -10,7 +10,8 @@ export const AppView: React.FunctionComponent<{
   currentPath
 }) => {
   const MainComponent: React.FunctionComponent = {
-    [AdminRoute.Home]: Home
+    [AdminRoute.Home]: Home,
+    [AdminRoute.Weapons]: Home
   }[currentPath]
   return (
     <MainComponent />

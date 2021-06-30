@@ -1,8 +1,6 @@
 import * as envalid from 'envalid'
 
-import { BackEnv, NodeEnv } from '$back/types'
-
-import { isNodeEnv } from './typeguards'
+import { BackEnv, isNodeEnv, NodeEnv } from '$back/types'
 
 const nodeEnvValidator = envalid.makeValidator((x: unknown): NodeEnv => {
   if (!isNodeEnv(x)) {

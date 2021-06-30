@@ -7,7 +7,13 @@
     "dev:back": "cd back && yarn run dev",
     "dev:front": "cd front && yarn run dev"
   },
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.21.1",
+    "fp-ts": "^2.10.5",
+    "io-ts": "^2.2.16",
+    "query-string": "^7.0.1",
+    "typed-redux-saga": "^1.3.1"
+  },
   "devDependencies": {
     "concurrently": "^6.1.0"
   }

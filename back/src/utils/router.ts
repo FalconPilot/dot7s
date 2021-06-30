@@ -1,15 +1,25 @@
 import * as path from 'path'
-import { Response } from 'express'
+import { NextFunction, Request, RequestHandler, Response } from 'express'
 
-interface ErrorPageOptions {
-  code: number
-  message: string
+import { APIErrorOptions } from '$back/types/errors'
+
+export const asyncRoute = (fn: (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => Promise<ReturnType<RequestHandler>>): RequestHandler => (req, res, next) => {
+  fn(req, res, next).catch(next)
 }
 
-export const renderErrorPage = (res: Response, options: ErrorPageOptions): void => {
-  res.status(options.code).render('error', {
-    code: options.code,
-    message: options.message
+export const renderErrorPage = (res: Response, options: APIErrorOptions): void => {
+  res.status(options.code).render('error', options)
+}
+
+export const renderErrorJson = (res: Response, options: APIErrorOptions): void => {
+  console.log(options)
+  res.status(options.code).json({
+    status: options.code,
+    reason: options.message
   })
 }
 
