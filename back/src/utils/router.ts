@@ -1,7 +1,9 @@
 import * as path from 'path'
+import * as Either from 'fp-ts/Either'
+import * as TaskEither from 'fp-ts/lib/TaskEither'
 import { NextFunction, Request, RequestHandler, Response } from 'express'
 
-import { APIErrorOptions } from '$back/types/errors'
+import { APIError, APIErrorOptions } from '$back/types/errors'
 
 export const asyncRoute = (fn: (
   req: Request,
@@ -16,12 +18,27 @@ export const renderErrorPage = (res: Response, options: APIErrorOptions): void =
 }
 
 export const renderErrorJson = (res: Response, options: APIErrorOptions): void => {
-  console.log(options)
-  res.status(options.code).json({
-    status: options.code,
-    reason: options.message
-  })
+  res.status(options.code).json(options)
 }
+
+export const renderJson = <T>(
+  res: Response
+) => (
+  pipeResult: Either.Either<APIError, T>
+): void => {
+  if (Either.isLeft(pipeResult)) {
+    renderErrorJson(res, pipeResult.left.options)
+    return
+  }
+  res.json(pipeResult.right)
+}
+
+export const asyncRenderJson = <T>(
+  res: Response
+) => async (
+  pipeResult: TaskEither.TaskEither<APIError, T>
+): Promise<void> =>
+  pipeResult().then(renderJson(res))
 
 export const viewPath = (slug: string): string => path.resolve(
   __dirname,

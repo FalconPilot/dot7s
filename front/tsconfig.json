@@ -12,6 +12,8 @@
     "./src-app/**/*.ts",
     "./src-app/**/*.tsx",
     "./src-admin/**/*.ts",
-    "./src-admin/**/*.tsx"
+    "./src-admin/**/*.tsx",
+    "./src-common/**/*.ts",
+    "./src-common/**/*.tsx"
   ]
 }

@@ -1,3 +1,5 @@
 export * from './app'
+export * from './header'
 export * from './home'
 export * from './providers'
+export * from './weapons'

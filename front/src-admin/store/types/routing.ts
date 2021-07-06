@@ -1,4 +1,5 @@
 import { isEnum } from '$common/utils/types'
+import { ValuesOf } from '$front/app/types'
 
 export enum AdminRoute {
   Home = '/',

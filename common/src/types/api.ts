@@ -8,6 +8,7 @@ export interface QSParams {
 
 export interface ApiHandler<RequestResponse> {
   withOptions: (options: AxiosRequestConfig) => ApiHandler<RequestResponse>
+  withBaseUrl: (baseUrl: string) => ApiHandler<RequestResponse>
   withBody: <BodyType>(body: BodyType) => ApiHandler<RequestResponse>
   withHeaders: (headers: Record<string, string>) => ApiHandler<RequestResponse>
   withQS: (qs: QSParams) => ApiHandler<RequestResponse>

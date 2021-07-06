@@ -2,16 +2,16 @@ import * as React from 'react'
 
 import { AdminRoute } from '$front/admin/store/types'
 import { useAppDispatch } from '$front/admin/utils'
-import { actions } from '$front/admin/store'
+import { actions } from '$front/admin/store/actions'
 
-import CardView from './Card'
+import { CardView } from './Card'
 
 export interface CardProps {
   label: string
   to: AdminRoute
 }
 
-const Card: React.FunctionComponent<CardProps> = ({ label, to }) => {
+export const Card: React.FunctionComponent<CardProps> = ({ label, to }) => {
   const dispatch = useAppDispatch()
 
   const handleClick = React.useCallback((): void => {
@@ -25,5 +25,3 @@ const Card: React.FunctionComponent<CardProps> = ({ label, to }) => {
     />
   )
 }
-
-export default Card

@@ -7,6 +7,7 @@
     "paths": {
       "$front/app/*": ["./front/src-app/*"],
       "$front/admin/*": ["./front/src-admin/*"],
+      "$front/common/*": ["./front/src-common/*"],
       "$back/*": ["./back/src/*"],
       "$common/*": ["./common/src/*"]
     }

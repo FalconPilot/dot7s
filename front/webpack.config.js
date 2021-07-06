@@ -32,7 +32,10 @@ module.exports = env => {
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js', '.jsx'],
-      plugins: [new TsconfigPathsPlugin()],
+      plugins: [
+        new TsconfigPathsPlugin()
+        // new webpack.EnvironmentPlugin(Object.keys(FrontEnv))
+      ],
       alias: {
         'react-redux': require.resolve('react-redux')
       }

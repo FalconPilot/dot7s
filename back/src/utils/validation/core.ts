@@ -3,13 +3,17 @@ import { pipe } from 'fp-ts/function'
 
 import { APIError } from '$back/types'
 
-export const validateNumeric = (tag: string) => (x: string): Either.Either<APIError, number> => pipe(
-  parseInt(x, 10),
+export const validateNumeric = (
+  label: string
+) => (
+  value: string
+): Either.Either<APIError, number> => pipe(
+  parseInt(value, 10),
   Either.fromPredicate(
     n => !isNaN(n),
     () => new APIError({
-      code: 500,
-      message: `${tag} should be a valid number`
+      code: 400,
+      message: `${label} should be a valid number`
     })
   )
 )

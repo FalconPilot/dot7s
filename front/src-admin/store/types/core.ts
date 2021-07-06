@@ -1,5 +1,21 @@
-import { store } from '../core'
+import { GameDataAction, GameDataActionType } from '$front/admin/store/actions/gameData'
+import { RoutingAction, RoutingActionType } from '$front/admin/store/actions/routing'
+import { Dispatch } from 'react'
 
-export type AppState = ReturnType<typeof store.getState>
+import { GameDataState } from './gameData'
+import { RoutingState } from './routing'
 
-export type AppDispatch = typeof store.dispatch
+export interface AppState {
+  gameData: GameDataState
+  routing: RoutingState
+}
+
+export type AppAction =
+  | GameDataAction
+  | RoutingAction
+
+export type AppActionType =
+  | GameDataActionType
+  | RoutingActionType
+
+export type AppDispatch = Dispatch<AppAction>

@@ -1,9 +1,9 @@
 import { all, fork } from 'redux-saga/effects'
 
-import { select } from '$common/utils/saga'
+import effects from '$front/admin/utils/saga'
 
 function * init () {
-  yield * select(state => state.routing.currentPath)
+  const currentPath = yield * effects.select(state => state.routing.currentPath)
 }
 
 export default function * coreSagas () {

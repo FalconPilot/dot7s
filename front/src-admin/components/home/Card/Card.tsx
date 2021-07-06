@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { CardWrapper } from './styled'
 
-const CardView: React.FunctionComponent<{
+export const CardView: React.FunctionComponent<{
   label: string
   handleClick: () => void
 }> = ({
@@ -15,5 +15,3 @@ const CardView: React.FunctionComponent<{
     </CardWrapper>
   )
 }
-
-export default CardView

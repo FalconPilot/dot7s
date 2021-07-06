@@ -1,12 +1,7 @@
-export type NodeEnv = 'development' | 'production'
+import { NodeEnv } from '$common/types'
 
 export interface BackEnv {
+  DATABASE_URL: string
   NODE_ENV: NodeEnv
   PORT: number
 }
-
-export const isNodeEnv = (x: unknown): x is NodeEnv =>
-  typeof x === 'string' && [
-    'development',
-    'production'
-  ].includes(x)

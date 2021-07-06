@@ -1,6 +1,7 @@
 import * as envalid from 'envalid'
 
-import { BackEnv, isNodeEnv, NodeEnv } from '$back/types'
+import { BackEnv } from '$back/types'
+import { isNodeEnv, NodeEnv } from '$common/types'
 
 const nodeEnvValidator = envalid.makeValidator((x: unknown): NodeEnv => {
   if (!isNodeEnv(x)) {
@@ -10,6 +11,7 @@ const nodeEnvValidator = envalid.makeValidator((x: unknown): NodeEnv => {
 })
 
 export const parseEnv = (rawEnv: unknown): BackEnv => envalid.cleanEnv<BackEnv>(rawEnv, {
+  DATABASE_URL: envalid.str(),
   NODE_ENV: nodeEnvValidator(),
   PORT: envalid.num()
 })

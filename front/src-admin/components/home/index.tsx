@@ -12,6 +12,6 @@ const cards: CardProps[] = [{
 
 export const Home: React.FunctionComponent = () => {
   return (
-    <HomeView />
+    <HomeView cards={cards} />
   )
 }
